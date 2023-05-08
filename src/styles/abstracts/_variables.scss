@@ -1,0 +1,53 @@
+$remBase: 10 !default;
+$useRem: false !default;
+
+$spacing-types: (
+  0: 2,
+  1: 4,
+  2: 8,
+  3: 12,
+  4: 16,
+  5: 20,
+  6: 24,
+  7: 32,
+  8: 48,
+  9: 64,
+  10: 96,
+);
+
+$z-index-types: (
+  under: -1,
+  base: 0,
+  resting: 1,
+  floating: 2,
+  navigation: 3,
+  modal: 4,
+);
+
+$breakpoints: (
+  xs: '320px',
+  sm: '425px',
+  md: '768px',
+  lg: '1024px',
+  xl: '1200px',
+);
+
+$elevation-types: (
+  0: inset 0 2px 0 rgba(0, 0, 0, 0.05),
+  1: (
+    0 2px 3px rgba(0, 0, 0, 0.05),
+    0 4px 8px rgba(0, 0, 0, 0.15),
+  ),
+  2: (
+    0 2px 4px rgba(0, 0, 0, 0.05),
+    0 8px 15px rgba(0, 0, 0, 0.15),
+  ),
+  3: (
+    0 2px 8px rgba(0, 0, 0, 0.1),
+    0 12px 30px rgba(0, 0, 0, 0.15),
+  ),
+  4: (
+    0 4px 12px rgba(0, 0, 0, 0.1),
+    0 20px 64px rgba(0, 0, 0, 0.2),
+  ),
+);

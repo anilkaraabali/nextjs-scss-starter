@@ -1,0 +1,13 @@
+body {
+  font-size: 1.6rem;
+  line-height: 2.8rem;
+
+  /* To provide the contextual adjustment of inter-glyph spacing. */
+  font-kerning: normal;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+}

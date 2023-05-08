@@ -1,0 +1,60 @@
+@mixin getErrorMessage($variable: null, $variables: null) {
+  $error-message: #{'Invalid' + ' ' + $variable + ' ' + 'type, try one of these instead:'};
+
+  @each $name, $value in $variables {
+    $error-message: $error-message + ' #{$name},';
+  }
+
+  @error $error-message;
+}
+
+@mixin elevation($type: 0) {
+  @if map-has-key($elevation-types, $type) {
+    box-shadow: map-get($elevation-types, $type);
+  } @else {
+    @include getErrorMessage('elevation', $elevation-types);
+  }
+}
+
+@mixin respond-to($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @include getErrorMessage('breakpoint', $breakpoints);
+  }
+}
+
+@mixin ellipsis($lines: 1) {
+  overflow: hidden;
+
+  @if $lines == 1 {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  } @else {
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+  }
+}
+
+@mixin hideScroll {
+  &::-webkit-scrollbar {
+    appearance: none !important;
+    display: none !important;
+  }
+}
+
+@mixin makeGrid($column: 3, $min-width: 100) {
+  --grid-column-count: 3;
+  --grid-layout-gap: #{spacing(2)};
+  --grid-item-min-width: #{size($min-width)};
+  --gap-count: calc(var(--grid-column-count) - 1);
+  --total-gap-width: calc(var(--gap-count) * var(--grid-layout-gap));
+  --grid-item-max-width: calc((100% - var(--total-gap-width)) / var(--grid-column-count));
+
+  display: grid;
+  grid-gap: var(--grid-layout-gap);
+  grid-template-columns: repeat(auto-fill, minmax(max(var(--grid-item-min-width), var(--grid-item-max-width)), 1fr));
+}

@@ -1,0 +1,17 @@
+.root {
+  align-items: center;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100vh;
+
+  &--el {
+    color: red;
+  }
+}
+
+.main {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: spacing() spacing(4);
+}

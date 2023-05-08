@@ -1,0 +1,11 @@
+@import 'global';
+@import 'base/all';
+
+:root {
+  @each $name, $value in $colors {
+    --color-#{$name}: #{$value};
+    --color-rgb-#{$name}: #{map-get($colors-rgb, $name)};
+  }
+
+  --max-width: 110rem;
+}

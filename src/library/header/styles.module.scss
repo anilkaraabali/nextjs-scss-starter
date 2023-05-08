@@ -1,0 +1,18 @@
+.header {
+  height: size(72);
+  display: flex;
+  align-items: center;
+  border-bottom: size(1) solid color(neutral-100);
+}
+
+.content {
+  display: flex;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 spacing(4);
+}
+
+.logo {
+  display: flex;
+}
