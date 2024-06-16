@@ -1,26 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { middleware } from '@/middleware';
+import { middleware } from '../middleware';
 
 const ua = `Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Mobile Safari/537.36`;
 
 const makeRequest = (userAgent: string = ua) =>
   ({
-    url: 'http://localhost:3000/logo.svg',
+    headers: {
+      get: () => userAgent,
+      'user-agent': userAgent,
+    },
     nextUrl: {
-      href: 'http://localhost:3000/logo.svg',
-      origin: 'http://localhost:3000',
       host: 'localhost:3000',
       hostname: 'localhost',
+      href: 'http://localhost:3000/logo.svg',
+      origin: 'http://localhost:3000',
       pathname: '/logo.svg',
     },
-    headers: {
-      'user-agent': userAgent,
-      get: () => userAgent,
-    },
-  } as unknown as NextRequest);
+    url: 'http://localhost:3000/logo.svg',
+  }) as unknown as NextRequest;
 
-describe('middleware', () => {
+describe('middleware()', () => {
   let rewriteSpy: jest.SpyInstance;
   let nextSpy: jest.SpyInstance;
 
@@ -35,21 +35,26 @@ describe('middleware', () => {
   });
 
   describe('redirect', () => {
-    it('should redirect to /404 if isBot', async () => {
+    it('redirects to /404 if isBot', async () => {
       await middleware(makeRequest('Googlebot'));
+
       expect(rewriteSpy).toHaveBeenCalled();
     });
 
     it('should not redirect to /404 if not isBot', async () => {
       await middleware(makeRequest());
+
       expect(rewriteSpy).not.toHaveBeenCalled();
     });
 
-    it('should add x-viewport header', async () => {
+    it('adds x-viewport header', async () => {
       const request = makeRequest();
       await middleware(request);
+
       expect(nextSpy).toHaveBeenCalled();
-      expect(nextSpy.mock.calls[0][0].request.headers.get('x-viewport')).toEqual('mobile');
+      expect(
+        nextSpy.mock.calls[0][0].request.headers.get('x-viewport')
+      ).toEqual('mobile');
     });
   });
 });

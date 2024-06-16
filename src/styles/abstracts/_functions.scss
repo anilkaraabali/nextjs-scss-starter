@@ -15,10 +15,19 @@
 
     @if map-has-key($colors, $selected-color) {
       @if $alpha {
-        @return rgba(var(--color-rgb-#{$selected-color}, map-get($colors-rgb, $selected-color)), $alpha);
+        @return rgba(
+          var(
+            --color-rgb-#{$selected-color},
+            map-get($colors-rgb, $selected-color)
+          ),
+          $alpha
+        );
       }
 
-      @return var(--color-#{$selected-color}, map-get($colors, $selected-color));
+      @return var(
+        --color-#{$selected-color},
+        map-get($colors, $selected-color)
+      );
     } @else {
       @return getErrorMessage('colors', $colors);
     }

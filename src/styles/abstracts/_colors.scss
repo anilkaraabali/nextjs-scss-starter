@@ -2,7 +2,8 @@
 @use 'sass:color';
 
 @function rgbCalculator($selected-color: null) {
-  @return color.red($selected-color), color.green($selected-color), color.blue($selected-color);
+  @return color.red($selected-color), color.green($selected-color),
+    color.blue($selected-color);
 }
 
 $colors: (
