@@ -7,8 +7,8 @@ interface Props {
 }
 
 interface State {
-  hasError: boolean;
   error?: Error;
+  hasError: boolean;
 }
 
 export class ErrorBoundaryComponent extends React.Component<Props, State> {
@@ -26,7 +26,12 @@ export class ErrorBoundaryComponent extends React.Component<Props, State> {
 
   public render(): JSX.Element | React.ReactNode {
     if (this.state.hasError) {
-      return <ErrorView statusCode={400} title='Oops, an unexpected error occurred!' />;
+      return (
+        <ErrorView
+          statusCode={400}
+          title='Oops, an unexpected error occurred!'
+        />
+      );
     }
 
     return this.props.children;

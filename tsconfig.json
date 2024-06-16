@@ -17,17 +17,27 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "mocks/*": ["mocks/*"],
+      "mocks/*": ["__mocks__/*"],
       "stubs/*": ["stubs/*"],
       "public/*": ["public/*"]
     },
     "plugins": [
       {
         "name": "typescript-plugin-css-modules"
+      },
+      {
+        "name": "next"
       }
     ]
   },
   "typeRoots": ["node_modules/@types"],
-  "include": ["**.*.d.ts", "**/*.ts", "**/*.tsx", "**/*.json"],
-  "exclude": ["node_modules", "__tests__"]
+  "include": [
+    "**.*.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.json",
+    "./.eslintrc.js",
+    "jest.config.mjs"
+  ],
+  "exclude": ["node_modules", "public"]
 }

@@ -6,10 +6,6 @@ const createJestConfig = nextJest({
 
 /** @type {import('jest').Config} */
 const config = {
-  globals: {
-    NODE_ENV: 'test',
-    IS_REACT_ACT_ENVIRONMENT: true,
-  },
   clearMocks: true,
   collectCoverageFrom: [
     '**/*.{js,jsx,ts,tsx}',
@@ -20,23 +16,30 @@ const config = {
     '!<rootDir>/.next/**',
     '!<rootDir>/*.config.js',
     '!<rootDir>/coverage/**',
-    '!<rootDir>/mocks/**',
+    '!<rootDir>/__mocks__/**',
     '!<rootDir>/stubs/**',
   ],
+  coverageReporters: ['text', 'html', 'json-summary'],
   coverageThreshold: {
     global: {
-      statements: 85,
       branches: 80,
       functions: 85,
       lines: 85,
+      statements: 85,
     },
   },
-  coverageReporters: ['text', 'html', 'json-summary'],
+  globals: {
+    IS_REACT_ACT_ENVIRONMENT: true,
+    NODE_ENV: 'test',
+  },
   moduleDirectories: ['node_modules', '<rootDir>/'],
-  moduleFileExtensions: ['js', 'ts', 'tsx', 'json'],
+  moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'json'],
+  moduleNameMapper: {
+    '@/(.*)': '<rootDir>/src/$1',
+  },
+  setupFilesAfterEnv: ['<rootDir>/__mocks__/setup.mock.ts'],
   testEnvironment: 'jest-environment-jsdom',
   testMatch: ['**/__tests__/**/*.(spec|test).[jt]s?(x)'],
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
 };
 
 export default createJestConfig(config);

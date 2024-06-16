@@ -24,7 +24,9 @@ describe('ErrorBoundaryComponent', () => {
       </ErrorBoundaryComponent>
     );
 
-    expect(screen.getByText('Oops, an unexpected error occurred!')).toBeInTheDocument();
+    expect(
+      screen.getByText('Oops, an unexpected error occurred!')
+    ).toBeInTheDocument();
     expect(consoleErrorMock).toHaveBeenCalled();
   });
 

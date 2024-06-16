@@ -1,5 +1,6 @@
 @mixin getErrorMessage($variable: null, $variables: null) {
-  $error-message: #{'Invalid' + ' ' + $variable + ' ' + 'type, try one of these instead:'};
+  $error-message: #{'Invalid' + ' ' + $variable + ' ' +
+    'type, try one of these instead:'};
 
   @each $name, $value in $variables {
     $error-message: $error-message + ' #{$name},';
@@ -41,8 +42,17 @@
 
 @mixin hideScroll {
   &::-webkit-scrollbar {
-    appearance: none !important;
-    display: none !important;
+    scrollbar-width: none;
+
+    @supports not (scrollbar-width: none) {
+      height: 0;
+      width: 0;
+    }
+
+    @-moz-document url-prefix() {
+      -ms-overflow-style: none;
+      scrollbar-color: transparent transparent;
+    }
   }
 }
 
@@ -52,9 +62,14 @@
   --grid-item-min-width: #{size($min-width)};
   --gap-count: calc(var(--grid-column-count) - 1);
   --total-gap-width: calc(var(--gap-count) * var(--grid-layout-gap));
-  --grid-item-max-width: calc((100% - var(--total-gap-width)) / var(--grid-column-count));
+  --grid-item-max-width: calc(
+    (100% - var(--total-gap-width)) / var(--grid-column-count)
+  );
 
   display: grid;
   grid-gap: var(--grid-layout-gap);
-  grid-template-columns: repeat(auto-fill, minmax(max(var(--grid-item-min-width), var(--grid-item-max-width)), 1fr));
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(max(var(--grid-item-min-width), var(--grid-item-max-width)), 1fr)
+  );
 }

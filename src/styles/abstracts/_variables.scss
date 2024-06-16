@@ -13,6 +13,7 @@ $spacing-types: (
   8: 48,
   9: 64,
   10: 96,
+  11: 128,
 );
 
 $z-index-types: (
@@ -25,11 +26,11 @@ $z-index-types: (
 );
 
 $breakpoints: (
-  xs: '320px',
-  sm: '425px',
-  md: '768px',
-  lg: '1024px',
-  xl: '1200px',
+  'mobile-large': 375px,
+  'tablet': 768px,
+  'tablet-landscape': 1024px,
+  'desktop': 1200px,
+  'desktop-large': 1440px,
 );
 
 $elevation-types: (
